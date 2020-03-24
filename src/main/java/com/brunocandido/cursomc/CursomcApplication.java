@@ -93,16 +93,43 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 
 		categoriaRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
 
+		// Dominio ClassificacaoProduto
+		ClassificacaoProduto cp1 = new ClassificacaoProduto(null, "Masculino");
+		ClassificacaoProduto cp2 = new ClassificacaoProduto(null, "Feminino");
+		
+		//Adicionando o Lista ao Produto
+		cp1.getProduto().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9));
+		cp2.getProduto().addAll(Arrays.asList(p10));
+		
+		//Adicionando Produto a Lista
+		
+		p1.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p2.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p3.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p4.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p5.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p6.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p7.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p8.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p9.getClassificacaoProduto().addAll(Arrays.asList(cp1));
+		p10.getClassificacaoProduto().addAll(Arrays.asList(cp2));
+		
+
+		
+
+		// Repository ClassificacaoProdutoRepository
+		classificacaoProdutoRepository.saveAll(Arrays.asList(cp1, cp2));
+		
+		//*****************************************************************
+
 		// Repository Produto
 
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 
-		// Dominio ClassificacaoProduto
-		ClassificacaoProduto cp1 = new ClassificacaoProduto(null, "Masculino");
-		ClassificacaoProduto cp2 = new ClassificacaoProduto(null, "Feminino");
-
-		// Repository ClassificacaoProdutoRepository
-		classificacaoProdutoRepository.saveAll(Arrays.asList(cp1, cp2));
+		
+		//*****************************************************************
+		
+		
 
 		// Dominio Sexo
 

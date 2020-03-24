@@ -29,9 +29,20 @@ public class Produto implements Serializable {
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
 	joinColumns = @JoinColumn(name = "produto_id"), 
 	inverseJoinColumns = @JoinColumn(name = "categoria_id")) // Estes  Comandos	 categoria// ID
-	
+	//Tabela Temporaria de Ligação
 	private List<Categoria> categorias = new ArrayList<>();
+	
+	
+	
+	@ManyToMany
+	@JoinTable(name = "PRODUTO_CLASSIFICACAO", 
+	joinColumns = @JoinColumn(name = "produto_id"), 
+	inverseJoinColumns = @JoinColumn(name = "classificacaoproduto_id")) // Estes  Comandos	 categoria// ID
+	
+	private List<ClassificacaoProduto> classificacaoProduto = new ArrayList<>();
+	
 
+	
 	public Produto() {
 
 	}
@@ -85,6 +96,15 @@ public class Produto implements Serializable {
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
+	
+	public List<ClassificacaoProduto> getClassificacaoProduto() {
+		return classificacaoProduto;
+	}
+
+	public void setClassificacaoProduto(List<ClassificacaoProduto> classificacaoProduto) {
+		this.classificacaoProduto = classificacaoProduto;
+	}
+
 
 	@Override
 	public int hashCode() {

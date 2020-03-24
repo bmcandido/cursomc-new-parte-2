@@ -1,11 +1,14 @@
 package com.brunocandido.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class ClassificacaoProduto implements Serializable {
@@ -15,9 +18,13 @@ public class ClassificacaoProduto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	
-	public ClassificacaoProduto(){
-		
+
+	@ManyToMany(mappedBy = "classificacaoProduto") // Mapeando dentro da tabela ClassificacaoProduto nao precisa fazer
+													// todo o processo basta
+	private List<Produto> produto = new ArrayList<>();
+
+	public ClassificacaoProduto() {
+
 	}
 
 	public ClassificacaoProduto(Integer id, String descricao) {
@@ -32,6 +39,14 @@ public class ClassificacaoProduto implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Produto> getProduto() {
+		return produto;
+	}
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
 	}
 
 	@Override
