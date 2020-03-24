@@ -27,22 +27,28 @@ public class Produto implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
-	joinColumns = @JoinColumn(name = "produto_id"), 
-	inverseJoinColumns = @JoinColumn(name = "categoria_id")) // Estes  Comandos	 categoria// ID
-	//Tabela Temporaria de Ligação
+	          joinColumns = @JoinColumn(name = "produto_id"), 
+	          inverseJoinColumns = @JoinColumn(name = "categoria_id")) // Estes
+																																					// Comandos
+																																					// categoria//
+																																					// ID
+	// Tabela Temporaria de Ligação
 	private List<Categoria> categorias = new ArrayList<>();
-	
-	
-	
+
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CLASSIFICACAO", 
 	joinColumns = @JoinColumn(name = "produto_id"), 
-	inverseJoinColumns = @JoinColumn(name = "classificacaoproduto_id")) // Estes  Comandos	 categoria// ID
-	
+	inverseJoinColumns = @JoinColumn(name = "classificacaoproduto_id")) // Estes
+																																									// Comandos
 	private List<ClassificacaoProduto> classificacaoProduto = new ArrayList<>();
-	
 
-	
+	@ManyToMany
+	@JoinTable(name = "PRODUTO_TIPO", 
+	          joinColumns = @JoinColumn(name = "produto_id"), 
+	          inverseJoinColumns = @JoinColumn(name = "tipoproduto_id")) // Estes
+																																				// ID
+	private List<TipoProduto> tipoProduto = new ArrayList<>();
+
 	public Produto() {
 
 	}
@@ -96,7 +102,7 @@ public class Produto implements Serializable {
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
-	
+
 	public List<ClassificacaoProduto> getClassificacaoProduto() {
 		return classificacaoProduto;
 	}
@@ -105,6 +111,13 @@ public class Produto implements Serializable {
 		this.classificacaoProduto = classificacaoProduto;
 	}
 
+	public List<TipoProduto> getTipoProduto() {
+		return tipoProduto;
+	}
+
+	public void setTipoProduto(List<TipoProduto> tipoProduto) {
+		this.tipoProduto = tipoProduto;
+	}
 
 	@Override
 	public int hashCode() {

@@ -10,12 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.brunocandido.cursomc.domain.Categoria;
 import com.brunocandido.cursomc.domain.ClassificacaoProduto;
 import com.brunocandido.cursomc.domain.Produto;
-import com.brunocandido.cursomc.domain.Sexo;
+
 import com.brunocandido.cursomc.domain.TipoProduto;
 import com.brunocandido.cursomc.repositories.CategoriaRepository;
 import com.brunocandido.cursomc.repositories.ClassificacaoProdutoRepository;
 import com.brunocandido.cursomc.repositories.ProdutoRepository;
-import com.brunocandido.cursomc.repositories.SexoRepository;
+
 import com.brunocandido.cursomc.repositories.TipoProdutoRepository;
 
 @SpringBootApplication
@@ -29,9 +29,6 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 	ClassificacaoProdutoRepository classificacaoProdutoRepository;
 
 	@Autowired
-	SexoRepository sexorepository;
-
-	@Autowired
 	TipoProdutoRepository tipoProdutoRepository;
 
 	@Autowired
@@ -43,7 +40,7 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		// ****************************************************************************************************************
 		// Dominio Categoria
 
 		Categoria c1 = new Categoria(null, "Camisetas");
@@ -52,6 +49,8 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		Categoria c4 = new Categoria(null, "Calças Djeans");
 		Categoria c5 = new Categoria(null, "Bermudas");
 
+		// ****************************************************************************************************************
+		// Dominio Produtos
 		// Camisetas
 		Produto p1 = new Produto(null, "Camiseta Lacoste", 40.00, "Branca");
 		Produto p2 = new Produto(null, "Camiseta Lacoste", 40.00, "Preta");
@@ -67,7 +66,7 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		// Bermudas
 		Produto p9 = new Produto(null, "Bermuda Djeans", 80.00, "Djeans");
 		Produto p10 = new Produto(null, "Bermuda Djeans", 80.00, "Preta");
-
+		// ****************************************************************************************************************
 		// Acrescentando o Categoria ao Produto
 
 		c1.getProdutos().addAll(Arrays.asList(p1, p2));
@@ -75,7 +74,7 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		c3.getProdutos().addAll(Arrays.asList(p5, p6));
 		c4.getProdutos().addAll(Arrays.asList(p7, p8));
 		c5.getProdutos().addAll(Arrays.asList(p9, p10));
-
+		// ****************************************************************************************************************
 		// Acrescentando o Produto a Categoria
 
 		p1.getCategorias().addAll(Arrays.asList(c1));
@@ -88,21 +87,21 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		p8.getCategorias().addAll(Arrays.asList(c4));
 		p9.getCategorias().addAll(Arrays.asList(c5));
 		p10.getCategorias().addAll(Arrays.asList(c5));
-
+		// ****************************************************************************************************************
 		// Repository Categoria
 
 		categoriaRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
-
+		// ****************************************************************************************************************
 		// Dominio ClassificacaoProduto
 		ClassificacaoProduto cp1 = new ClassificacaoProduto(null, "Masculino");
 		ClassificacaoProduto cp2 = new ClassificacaoProduto(null, "Feminino");
-		
-		//Adicionando o Lista ao Produto
+		// ****************************************************************************************************************
+		// Adicionando o Lista ao Produto
 		cp1.getProduto().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9));
 		cp2.getProduto().addAll(Arrays.asList(p10));
-		
-		//Adicionando Produto a Lista
-		
+		// ****************************************************************************************************************
+		// Adicionando Produto a Lista
+
 		p1.getClassificacaoProduto().addAll(Arrays.asList(cp1));
 		p2.getClassificacaoProduto().addAll(Arrays.asList(cp1));
 		p3.getClassificacaoProduto().addAll(Arrays.asList(cp1));
@@ -113,39 +112,40 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		p8.getClassificacaoProduto().addAll(Arrays.asList(cp1));
 		p9.getClassificacaoProduto().addAll(Arrays.asList(cp1));
 		p10.getClassificacaoProduto().addAll(Arrays.asList(cp2));
-		
-
-		
-
+		// ****************************************************************************************************************
 		// Repository ClassificacaoProdutoRepository
 		classificacaoProdutoRepository.saveAll(Arrays.asList(cp1, cp2));
-		
-		//*****************************************************************
 
-		// Repository Produto
-
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
-
-		
-		//*****************************************************************
-		
-		
-
-		// Dominio Sexo
-
-		Sexo s1 = new Sexo(null, "Masculino");
-		Sexo s2 = new Sexo(null, "Feminino");
-
-		// Repository Sexo
-		sexorepository.saveAll(Arrays.asList(s1, s2));
-
+		// ****************************************************************************************************************
 		// Dominio Tipo de Produto
 
 		TipoProduto tp1 = new TipoProduto(null, "Revenda");
+		TipoProduto tp2 = new TipoProduto(null, "Varejo");
+		
+		tp1.getProduto().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9,p10));
+		tp2.getProduto().addAll(Arrays.asList(p10));
+		
+		p1.getTipoProduto().addAll(Arrays.asList(tp1));
+		p2.getTipoProduto().addAll(Arrays.asList(tp1));
+		p3.getTipoProduto().addAll(Arrays.asList(tp1));
+		p4.getTipoProduto().addAll(Arrays.asList(tp1));
+		p5.getTipoProduto().addAll(Arrays.asList(tp1));
+		p6.getTipoProduto().addAll(Arrays.asList(tp1));
+		p7.getTipoProduto().addAll(Arrays.asList(tp1));
+		p8.getTipoProduto().addAll(Arrays.asList(tp1));
+		p9.getTipoProduto().addAll(Arrays.asList(tp1));
+		p10.getTipoProduto().addAll(Arrays.asList(tp1,tp2));
+		// ****************************************************************************************************************
+		// Repository tipo de Produtos
 
-		// Repository
+		tipoProdutoRepository.saveAll(Arrays.asList(tp1,tp2));
 
-		tipoProdutoRepository.saveAll(Arrays.asList(tp1));
+		// ****************************************************************************************************************
+		// *****************************************************************************************************************
+		// Repository Produto
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
+		// ****************************************************************************************************************
+		// ****************************************************************************************************************
 
 	}
 

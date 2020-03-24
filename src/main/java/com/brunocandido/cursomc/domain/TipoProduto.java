@@ -1,11 +1,14 @@
 package com.brunocandido.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class TipoProduto implements Serializable {
@@ -15,9 +18,12 @@ public class TipoProduto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String tipo;
-	
+
+	@ManyToMany(mappedBy = "tipoProduto")
+	private List<Produto> produto = new ArrayList<>();
+
 	public TipoProduto() {
-		
+
 	}
 
 	public TipoProduto(Integer id, String tipo) {
@@ -40,6 +46,14 @@ public class TipoProduto implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public List<Produto> getProduto() {
+		return produto;
+	}
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
 	}
 
 	@Override
