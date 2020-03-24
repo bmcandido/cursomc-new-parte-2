@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brunocandido.cursomc.domain.Categoria;
-import com.brunocandido.cursomc.services.CategoriaServices;
+import com.brunocandido.cursomc.services.CategoriaService;
 
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
 	@Autowired // Faz o instanciamento automaticamente dentro do objeto
-	CategoriaServices service;
+	CategoriaService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET) // Depois de Criada a Classe CategoriaResourc
 																	// acrescenta value="/{id}",

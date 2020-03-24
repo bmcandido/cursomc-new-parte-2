@@ -3,9 +3,9 @@ package com.brunocandido.cursomc.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.brunocandido.cursomc.domain.Categoria;
+import com.brunocandido.cursomc.domain.Sexo;
 
 @Repository
-public interface SexoRepository extends JpaRepository<Categoria, Integer> {
+public interface SexoRepository extends JpaRepository<Sexo, Integer> {
 
 }

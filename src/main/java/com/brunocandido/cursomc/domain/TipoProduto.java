@@ -15,6 +15,10 @@ public class TipoProduto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String tipo;
+	
+	public TipoProduto() {
+		
+	}
 
 	public TipoProduto(Integer id, String tipo) {
 		super();

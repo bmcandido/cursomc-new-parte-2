@@ -15,6 +15,10 @@ public class ClassificacaoProduto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
+	
+	public ClassificacaoProduto(){
+		
+	}
 
 	public ClassificacaoProduto(Integer id, String descricao) {
 		super();

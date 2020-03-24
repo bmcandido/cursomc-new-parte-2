@@ -11,7 +11,7 @@ import com.brunocandido.cursomc.repositories.CategoriaRepository;
 //2º Camada - Chama Repository
 
 @Service
-public class CategoriaServices {
+public class CategoriaService {
 
 	@Autowired // Anotação do Spring
 

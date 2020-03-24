@@ -2,11 +2,14 @@ package com.brunocandido.cursomc.domain;
 
 import java.io.Serializable;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//Camada 0
 @Entity // Relação Objeto Banco de Dados
 public class Categoria implements Serializable {
 

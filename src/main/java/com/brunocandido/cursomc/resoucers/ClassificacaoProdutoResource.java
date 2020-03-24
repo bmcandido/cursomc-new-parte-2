@@ -1,30 +1,31 @@
 package com.brunocandido.cursomc.resoucers;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.brunocandido.cursomc.domain.ClassificacaoProduto;
+import com.brunocandido.cursomc.services.ClassificacaoProdutoService;
 
 @RestController
 @RequestMapping(value = "/classificacaoproduto")
 public class ClassificacaoProdutoResource {
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<ClassificacaoProduto> classificacao() {
 
-		ClassificacaoProduto c1 = new ClassificacaoProduto(1, "Mercado Interno");
-		ClassificacaoProduto c2 = new ClassificacaoProduto(2, "Mercado Externo");
+	@Autowired // Faz o instanciamento automaticamente dentro do objeto
+	ClassificacaoProdutoService service;
 
-		List<ClassificacaoProduto> classificacao = new ArrayList<>();
-		classificacao.add(c1);
-		classificacao.add(c2);
-		
-		return classificacao;
-		
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+
+		ClassificacaoProduto obj = service.buscar(id); // Acessa o Objeto de Repositorio CategoriaRepository
+
+		return ResponseEntity.ok().body(obj); // Retornando o Objeto Encontrado na CAtegoria Repository
+
 
 	}
 
