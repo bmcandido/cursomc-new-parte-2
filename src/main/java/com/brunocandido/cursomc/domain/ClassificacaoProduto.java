@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class ClassificacaoProduto implements Serializable {
 
@@ -18,7 +20,8 @@ public class ClassificacaoProduto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-
+    
+	@JsonManagedReference //Acrescentado para tratar erro no momento que roda o Jason
 	@ManyToMany(mappedBy = "classificacaoProduto") // Mapeando dentro da tabela ClassificacaoProduto nao precisa fazer
 													// todo o processo basta
 	private List<Produto> produto = new ArrayList<>();

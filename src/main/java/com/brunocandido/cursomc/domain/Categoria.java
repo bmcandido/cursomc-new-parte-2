@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 //Camada 0
 @Entity // Relação Objeto Banco de Dados
 public class Categoria implements Serializable {
@@ -21,7 +23,9 @@ public class Categoria implements Serializable {
 														// tabela no banco de dados B2-b
 	private Integer id;
 	private String Nome;
-
+    
+	
+	@JsonManagedReference //Acrescentado para tratar erro no momento que roda o Jason
 	@ManyToMany(mappedBy = "categorias") // Mapeando dentro da tabela categorias nao precisa fazer todo o processo basta
 											// informar o funcao mappedBy
 	private List<Produto> produtos = new ArrayList<>();

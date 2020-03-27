@@ -1,38 +1,36 @@
 package com.brunocandido.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class TipoProduto implements Serializable {
-
+public class Cidades implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String tipo;
-    
-	@JsonManagedReference //Acrescentado para tratar erro no momento que roda o Jason
-	@ManyToMany(mappedBy = "tipoProduto")
-	private List<Produto> produto = new ArrayList<>();
-
-	public TipoProduto() {
-
+	private String nome;
+	
+	@ManyToOne
+	@JoinColumn(name="estado_id")
+	private Estado estado;
+	
+	public Cidades() {
 	}
 
-	public TipoProduto(Integer id, String tipo) {
+	public Cidades(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
-		this.tipo = tipo;
+		this.nome = nome;
+		this.estado = estado;
 	}
 
 	public Integer getId() {
@@ -43,20 +41,20 @@ public class TipoProduto implements Serializable {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public List<Produto> getProduto() {
-		return produto;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -75,7 +73,7 @@ public class TipoProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoProduto other = (TipoProduto) obj;
+		Cidades other = (Cidades) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -83,5 +81,7 @@ public class TipoProduto implements Serializable {
 			return false;
 		return true;
 	}
-
+	
+	
+	
 }

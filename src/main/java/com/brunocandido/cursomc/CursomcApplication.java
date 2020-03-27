@@ -13,10 +13,14 @@ import com.brunocandido.cursomc.domain.Produto;
 
 import com.brunocandido.cursomc.domain.TipoProduto;
 import com.brunocandido.cursomc.repositories.CategoriaRepository;
+import com.brunocandido.cursomc.repositories.CidadeRepository;
 import com.brunocandido.cursomc.repositories.ClassificacaoProdutoRepository;
+import com.brunocandido.cursomc.repositories.EstadoRepository;
 import com.brunocandido.cursomc.repositories.ProdutoRepository;
 
 import com.brunocandido.cursomc.repositories.TipoProdutoRepository;
+import com.brunocandido.cursomc.domain.Cidades;
+import com.brunocandido.cursomc.domain.Estado;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner { // Acrescentei o implemento CommandLineRunner serve para
@@ -33,6 +37,14 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 
 	@Autowired
 	ProdutoRepository produtoRepository;
+	
+	@Autowired
+	EstadoRepository estadoRepository;
+	
+	@Autowired
+	CidadeRepository cidadeRepository;
+	
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -146,6 +158,24 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 		// ****************************************************************************************************************
 		// ****************************************************************************************************************
+		
+		
+		//*****************************************************************************************************************
+		
+		Estado est0 = new Estado(null, "Goiás");
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+		
+		Cidades cc0 = new Cidades(null, "Goiânia", est0);
+		Cidades cc1 = new Cidades(null, "Uberlândia", est1);
+		Cidades cc2 = new Cidades(null, "São Paulo", est2);
+		Cidades cc3 = new Cidades(null, "Campinas", est2);
+		
+		est1.getCidades().addAll(Arrays.asList(cc1));
+		est2.getCidades().addAll(Arrays.asList(cc2, cc3));
+
+		estadoRepository.saveAll(Arrays.asList(est0,est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(cc0,cc1, cc2, cc3));
 
 	}
 
