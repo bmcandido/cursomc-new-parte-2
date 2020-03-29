@@ -8,19 +8,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.brunocandido.cursomc.domain.Categoria;
+import com.brunocandido.cursomc.domain.Cidades;
 import com.brunocandido.cursomc.domain.ClassificacaoProduto;
+import com.brunocandido.cursomc.domain.Cliente;
+import com.brunocandido.cursomc.domain.Enderecos;
+import com.brunocandido.cursomc.domain.Estado;
 import com.brunocandido.cursomc.domain.Produto;
-
 import com.brunocandido.cursomc.domain.TipoProduto;
+import com.brunocandido.cursomc.enuns.TipoCliente;
 import com.brunocandido.cursomc.repositories.CategoriaRepository;
 import com.brunocandido.cursomc.repositories.CidadeRepository;
 import com.brunocandido.cursomc.repositories.ClassificacaoProdutoRepository;
+import com.brunocandido.cursomc.repositories.ClienteRepository;
+import com.brunocandido.cursomc.repositories.EnderecosRepository;
 import com.brunocandido.cursomc.repositories.EstadoRepository;
 import com.brunocandido.cursomc.repositories.ProdutoRepository;
-
 import com.brunocandido.cursomc.repositories.TipoProdutoRepository;
-import com.brunocandido.cursomc.domain.Cidades;
-import com.brunocandido.cursomc.domain.Estado;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner { // Acrescentei o implemento CommandLineRunner serve para
@@ -37,14 +40,18 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 
 	@Autowired
 	ProdutoRepository produtoRepository;
-	
+
 	@Autowired
 	EstadoRepository estadoRepository;
-	
+
 	@Autowired
 	CidadeRepository cidadeRepository;
-	
-	
+
+	@Autowired
+	ClienteRepository clienteRepository;
+
+	@Autowired
+	EnderecosRepository enderecosRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -133,10 +140,10 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 
 		TipoProduto tp1 = new TipoProduto(null, "Revenda");
 		TipoProduto tp2 = new TipoProduto(null, "Varejo");
-		
-		tp1.getProduto().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9,p10));
+
+		tp1.getProduto().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 		tp2.getProduto().addAll(Arrays.asList(p10));
-		
+
 		p1.getTipoProduto().addAll(Arrays.asList(tp1));
 		p2.getTipoProduto().addAll(Arrays.asList(tp1));
 		p3.getTipoProduto().addAll(Arrays.asList(tp1));
@@ -146,11 +153,11 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		p7.getTipoProduto().addAll(Arrays.asList(tp1));
 		p8.getTipoProduto().addAll(Arrays.asList(tp1));
 		p9.getTipoProduto().addAll(Arrays.asList(tp1));
-		p10.getTipoProduto().addAll(Arrays.asList(tp1,tp2));
+		p10.getTipoProduto().addAll(Arrays.asList(tp1, tp2));
 		// ****************************************************************************************************************
 		// Repository tipo de Produtos
 
-		tipoProdutoRepository.saveAll(Arrays.asList(tp1,tp2));
+		tipoProdutoRepository.saveAll(Arrays.asList(tp1, tp2));
 
 		// ****************************************************************************************************************
 		// *****************************************************************************************************************
@@ -158,24 +165,41 @@ public class CursomcApplication implements CommandLineRunner { // Acrescentei o 
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 		// ****************************************************************************************************************
 		// ****************************************************************************************************************
-		
-		
-		//*****************************************************************************************************************
-		
+
+		// *****************************************************************************************************************
+
 		Estado est0 = new Estado(null, "Goiás");
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
-		
+
 		Cidades cc0 = new Cidades(null, "Goiânia", est0);
 		Cidades cc1 = new Cidades(null, "Uberlândia", est1);
 		Cidades cc2 = new Cidades(null, "São Paulo", est2);
 		Cidades cc3 = new Cidades(null, "Campinas", est2);
-		
+
 		est1.getCidades().addAll(Arrays.asList(cc1));
 		est2.getCidades().addAll(Arrays.asList(cc2, cc3));
 
-		estadoRepository.saveAll(Arrays.asList(est0,est1, est2));
-		cidadeRepository.saveAll(Arrays.asList(cc0,cc1, cc2, cc3));
+		estadoRepository.saveAll(Arrays.asList(est0, est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(cc0, cc1, cc2, cc3));
+
+		// ****************************************************************************************************************
+		// Dominio do Cliente e Enderecos
+
+		Cliente cli1 = new Cliente(null, "Bruno Mario Candido", "bmcandido@gmail.com", "009.736.851-23",
+				TipoCliente.PESSOAFISICA);
+		cli1.getTelefone().addAll(Arrays.asList("(62) 98117-6799", "(62) 3455-2029"));
+
+		Enderecos end1 = new Enderecos(null, "Rua S2", "20", "Apto 202", "Santa Efigenia", "74556-020", cli1, cc1);
+		Enderecos end2 = new Enderecos(null, "Rua a673", "S/N", "Qd-120, Lt-05", "Setor Bueno", "74556-020", cli1, cc1);
+
+		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
+
+		// ****************************************************************************************************************
+		// Repository tipo de Produtos
+
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecosRepository.saveAll(Arrays.asList(end1, end2));
 
 	}
 
