@@ -5,7 +5,7 @@ package com.brunocandido.cursomc.domain;
 import com.github.gilbertotorrezan.viacep.se.ViaCEPClient;
 import com.github.gilbertotorrezan.viacep.shared.ViaCEPEndereco;
 
-public class Cep {
+public class CEP {
 
 	private Integer id;
 	private String bairro;
@@ -13,10 +13,10 @@ public class Cep {
 	private String cep;
 	private String complemento;
 
-	public Cep() {
+	public CEP() {
 	}
 
-	public Cep(String cepe) throws Exception {
+	public CEP(String cepe) throws Exception {
 		super();
 		ViaCEPClient cliente = new ViaCEPClient();
 		ViaCEPEndereco codigoCep = cliente.getEndereco(cepe);
